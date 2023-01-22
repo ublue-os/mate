@@ -1,0 +1,30 @@
+name: build
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: 0 2 * * *
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/fedora:rawhide
+      # Fix SELinux for the built OSTree: https://github.com/coreos/rpm-ostree/issues/1943
+      options: --privileged --security-opt label:disable
+    steps:
+      - name: Install dependencies
+        run: dnf install -y rpm-ostree selinux-policy selinux-policy-targeted policycoreutils podman
+
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Login
+        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+
+      - name: Build OSTree container image and push to registry
+        run: rpm-ostree compose image --initialize --format=registry fedora-mate.yaml ghcr.io/ublue-os/mate:latest

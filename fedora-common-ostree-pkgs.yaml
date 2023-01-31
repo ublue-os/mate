@@ -200,6 +200,7 @@ packages:
   - sudo
   - system-config-printer-udev
   - systemd
+  - systemd-oomd-defaults
   - systemd-resolved
   - systemd-udev
   - tar

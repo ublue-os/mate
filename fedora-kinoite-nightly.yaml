@@ -1,0 +1,61 @@
+include: kde-desktop-pkgs.yaml
+ref: fedora/37/${basearch}/kinoite-nightly
+rojig:
+  name: fedora-kde-nightly
+  summary: "Fedora Kinoite (KDE) base image"
+  license: MIT
+packages:
+  - fedora-release-kinoite
+  # Wayland support
+  - kwayland-integration
+  - kwin-wayland
+  - plasma-workspace-wayland
+  - xorg-x11-server-Xwayland
+  # Portals for Flatpak
+  - xdg-desktop-portal-kde
+  # Provide an archive manager by default
+  - ark
+  # Keep some basic apps installed until we have Flatpaks available
+  # See https://pagure.io/fedora-kde/SIG/issue/13
+  - gwenview
+  - kcalc
+  - kwrite
+  - okular
+  # Install some minor optional tools for KInfoCenter
+  - vulkan-tools
+  - xdpyinfo
+  # Includes a KIO & KCM (can not be Flatpak'ed), used by Dolphin and Gwenview
+  # See https://pagure.io/fedora-kde/SIG/issue/291
+  - kamera
+  # Install gdb-minimal to make getting backtraces work with DrKonqi
+  - gdb-minimal
+  # Testing https://pagure.io/fedora-kde/SIG/issue/109
+  - kdenetwork-filesharing
+  - samba-usershares
+  # KCM to manage Flatpak permissions
+  - flatpak-kcm
+
+# Make sure the following are not pulled in when Recommended by other packages
+exclude-packages:
+  - plasma-discover-offline-updates
+  - plasma-discover-packagekit
+  - plasma-pk-updates
+  # Manually excluded as recommended by gtk3 (and likely gtk4 in the future)
+  # See https://pagure.io/fedora-kde/SIG/issue/124
+  - tracker
+  - tracker-miners
+
+# Kinoite specific workarounds
+postprocess:
+  - |
+    #!/bin/bash
+    set -xeuo pipefail
+    # Setup a symlink for gdb-minimal to use it as default gdb
+    echo "L /usr/local/bin/gdb - - - - /usr/bin/gdb-minimal" > /usr/lib/tmpfiles.d/kinoite-gdb.conf
+    # Keep SDDM on X11 for now until Wayland support is fixed
+    echo -e "[General]\nDisplayServer=x11" > /etc/sddm.conf.d/x11.conf
+
+repos:
+  - fedora-37-nokde
+  - fedora-37-updates-nokde
+  - copr:copr.fedorainfracloud.org:group_kdesig:kde-nightly

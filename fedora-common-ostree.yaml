@@ -1,6 +1,6 @@
 ref: fedora/37/${basearch}/ostree-base
 
-automatic_version_prefix: "37"
+automatic_version_prefix: "37.<date:%Y%m%d>"
 mutate-os-release: "37"
 
 include: fedora-common-ostree-pkgs.yaml

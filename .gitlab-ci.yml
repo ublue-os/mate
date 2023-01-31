@@ -1,0 +1,100 @@
+# SPDX-License-Identifier: MIT
+
+image: quay.io/fedora-ostree-desktops/buildroot
+
+stages:
+  # - validate
+  - build
+  # - installer
+
+# validate manifests:
+#   stage: validate
+#   script:
+#     - just validate
+
+build silverblue:
+  stage: build
+  script:
+    - just compose-image silverblue
+    - just upload-container silverblue
+    # - just lorax silverblue
+    # - just archive silverblue iso
+    # - just archive silverblue repo
+  artifacts:
+    paths:
+      - .buildid
+      - logs
+    expire_in: 2 week
+
+build kinoite:
+  stage: build
+  script:
+    - just compose-image kinoite
+    - just upload-container kinoite
+    # - just compose kinoite
+    # - just lorax kinoite
+    # - just archive kinoite iso
+    # - just archive kinoite repo
+  artifacts:
+    paths:
+      - .buildid
+      - logs
+    expire_in: 2 week
+
+build kinoite-nightly:
+  stage: build
+  script:
+    - just compose-image kinoite-nightly
+    - just upload-container kinoite-nightly
+    # - just compose kinoite-nightly
+    # - just lorax kinoite-nightly
+    # - just archive kinoite-nightly iso
+    # - just archive kinoite-nightly repo
+  artifacts:
+    paths:
+      - .buildid
+      - logs
+    expire_in: 2 week
+
+build kinoite-beta:
+  stage: build
+  script:
+    - just compose-image kinoite-beta
+    - just upload-container kinoite-beta
+    # - just compose kinoite-beta
+    # - just lorax kinoite-beta
+    # - just archive kinoite-beta iso
+    # - just archive kinoite-beta repo
+  artifacts:
+    paths:
+      - .buildid
+      - logs
+    expire_in: 2 week
+
+build vauxite:
+  stage: build
+  script:
+    - just compose-image vauxite
+    - just upload-container vauxite
+    # - just lorax vauxite
+    # - just archive vauxite iso
+    # - just archive vauxite repo
+  artifacts:
+    paths:
+      - .buildid
+      - logs
+    expire_in: 2 week
+
+build base:
+  stage: build
+  script:
+    - just compose-image base
+    - just upload-container base
+    # - just lorax base
+    # - just archive base iso
+    # - just archive base repo
+  artifacts:
+    paths:
+      - .buildid
+      - logs
+    expire_in: 2 week

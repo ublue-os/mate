@@ -1,0 +1,46 @@
+include: kde-desktop-pkgs.yaml
+ref: fedora/37/${basearch}/kinoite-beta
+rojig:
+  name: fedora-kde-beta
+  summary: "Fedora Kinoite (KDE) base image"
+  license: MIT
+packages:
+  - fedora-release-kinoite
+  # Wayland support
+  - kwayland-integration
+  - kwin-wayland
+  - plasma-workspace-wayland
+  - xorg-x11-server-Xwayland
+  # Portals for Flatpak
+  - xdg-desktop-portal-kde
+  # Provide an archive manager by default
+  - ark
+  # Keep some basic apps installed until we have Flatpaks available
+  # See https://pagure.io/fedora-kde/SIG/issue/13
+  - gwenview
+  - kcalc
+  - kwrite
+  - okular
+  # Install some minor optional tools for KInfoCenter
+  - vulkan-tools
+  - xdpyinfo
+  # Includes a KIO & KCM (can not be Flatpak'ed), used by Dolphin and Gwenview
+  # See https://pagure.io/fedora-kde/SIG/issue/291
+  - kamera
+  # KCM to manage Flatpak permissions
+  # - flatpak-kcm
+
+# Make sure the following are not pulled in when Recommended by other packages
+exclude-packages:
+  - plasma-discover-offline-updates
+  - plasma-discover-packagekit
+  - plasma-pk-updates
+  # Manually excluded as recommended by gtk3 (and likely gtk4 in the future)
+  # See https://pagure.io/fedora-kde/SIG/issue/124
+  - tracker
+  - tracker-miners
+
+repos:
+  - fedora-37-nokde-beta
+  - fedora-37-updates-nokde-beta
+  - copr:copr.fedorainfracloud.org:group_kdesig:kde-beta

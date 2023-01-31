@@ -1,0 +1,34 @@
+[copr:copr.fedorainfracloud.org:group_kdesig:kde-beta]
+name=Copr repo for kde-beta owned by @kdesig
+baseurl=https://download.copr.fedorainfracloud.org/results/@kdesig/kde-beta/fedora-37-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://download.copr.fedorainfracloud.org/results/@kdesig/kde-beta/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1
+
+# Explicitely exclude all KDE packages that must come from the beta repo
+# from the Fedora repos to make sure we get them from the nightly copr
+# Generated from:
+# $ dnf install -y 'dnf-command(copr)'
+# $ dnf copr enable -y @kdesig/kde-beta
+# $ dnf repository-packages "copr:copr.fedorainfracloud.org:group_kdesig:kde-beta" list \
+#   | grep "copr:copr.fedorainfracloud.org:group_kdesig:kde-beta" | grep -vE "(debug|devel|\.src)" \
+#   | cut -f1 -d\ | sed 's/\.x86_64//' | sed 's/\.noarch//' | paste -sd " " -
+[fedora-37-nokde-beta]
+name=Fedora 37 $basearch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-37&arch=$basearch
+enabled=1
+gpgcheck=1
+metadata_expire=1d
+excludepkgs=bluedevil breeze-cursor-theme breeze-gtk breeze-gtk-common breeze-gtk-gtk2 breeze-gtk-gtk3 breeze-gtk-gtk4 flatpak-kcm grub2-breeze-theme kactivitymanagerd kde-cli-tools kde-gtk-config kdecoration kdeplasma-addons kdesu kgamma khotkeys kinfocenter kmenuedit kpipewire kscreen kscreenlocker ksshaskpass ksystemstats kwayland-integration kwin kwin-common kwin-doc kwin-libs kwin-wayland kwin-x11 kwrited layer-shell-qt libkscreen-qt5 libksysguard libksysguard-common libkworkspace5 oxygen-cursor-themes oxygen-sounds pam-kwallet plasma-breeze plasma-breeze-common plasma-browser-integration plasma-desktop plasma-desktop-doc plasma-desktop-kimpanel-scim plasma-discover plasma-discover-flatpak plasma-discover-libs plasma-discover-notifier plasma-discover-offline-updates plasma-discover-packagekit plasma-discover-rpm-ostree plasma-discover-snap plasma-disks plasma-drkonqi plasma-firewall plasma-firewall-firewalld plasma-firewall-ufw plasma-integration plasma-lookandfeel-fedora plasma-milou plasma-mobile plasma-nano plasma-nm plasma-nm-fortisslvpn plasma-nm-iodine plasma-nm-l2tp plasma-nm-mobile plasma-nm-openconnect plasma-nm-openswan plasma-nm-openvpn plasma-nm-pptp plasma-nm-ssh plasma-nm-sstp plasma-nm-strongswan plasma-nm-vpnc plasma-oxygen plasma-pa plasma-sdk plasma-systemmonitor plasma-systemsettings plasma-thunderbolt plasma-vault plasma-wayland-protocols plasma-welcome-app plasma-workspace plasma-workspace-common plasma-workspace-doc plasma-workspace-geolocation plasma-workspace-geolocation-libs plasma-workspace-libs plasma-workspace-wallpapers plasma-workspace-wayland plasma-workspace-x11 plymouth-kcm plymouth-theme-breeze polkit-kde powerdevil qqc2-breeze-style qt5-style-oxygen sddm-breeze sddm-kcm sddm-wayland-plasma xdg-desktop-portal-kde
+
+[fedora-37-updates-nokde-beta]
+name=Fedora 37 $basearch Updates
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f37&arch=$basearch
+enabled=1
+gpgcheck=1
+metadata_expire=1d
+excludepkgs=bluedevil breeze-cursor-theme breeze-gtk breeze-gtk-common breeze-gtk-gtk2 breeze-gtk-gtk3 breeze-gtk-gtk4 flatpak-kcm grub2-breeze-theme kactivitymanagerd kde-cli-tools kde-gtk-config kdecoration kdeplasma-addons kdesu kgamma khotkeys kinfocenter kmenuedit kpipewire kscreen kscreenlocker ksshaskpass ksystemstats kwayland-integration kwin kwin-common kwin-doc kwin-libs kwin-wayland kwin-x11 kwrited layer-shell-qt libkscreen-qt5 libksysguard libksysguard-common libkworkspace5 oxygen-cursor-themes oxygen-sounds pam-kwallet plasma-breeze plasma-breeze-common plasma-browser-integration plasma-desktop plasma-desktop-doc plasma-desktop-kimpanel-scim plasma-discover plasma-discover-flatpak plasma-discover-libs plasma-discover-notifier plasma-discover-offline-updates plasma-discover-packagekit plasma-discover-rpm-ostree plasma-discover-snap plasma-disks plasma-drkonqi plasma-firewall plasma-firewall-firewalld plasma-firewall-ufw plasma-integration plasma-lookandfeel-fedora plasma-milou plasma-mobile plasma-nano plasma-nm plasma-nm-fortisslvpn plasma-nm-iodine plasma-nm-l2tp plasma-nm-mobile plasma-nm-openconnect plasma-nm-openswan plasma-nm-openvpn plasma-nm-pptp plasma-nm-ssh plasma-nm-sstp plasma-nm-strongswan plasma-nm-vpnc plasma-oxygen plasma-pa plasma-sdk plasma-systemmonitor plasma-systemsettings plasma-thunderbolt plasma-vault plasma-wayland-protocols plasma-welcome-app plasma-workspace plasma-workspace-common plasma-workspace-doc plasma-workspace-geolocation plasma-workspace-geolocation-libs plasma-workspace-libs plasma-workspace-wallpapers plasma-workspace-wayland plasma-workspace-x11 plymouth-kcm plymouth-theme-breeze polkit-kde powerdevil qqc2-breeze-style qt5-style-oxygen sddm-breeze sddm-kcm sddm-wayland-plasma xdg-desktop-portal-kde

@@ -265,3 +265,5 @@ desktop_exclude_list:
     - NetworkManager-wifi
     # Already in the common set
     - wireplumber
+    # Already provided by mate-desktop-config
+    - systemd-oomd-defaults

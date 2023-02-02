@@ -12,7 +12,6 @@ packages:
 
 exclude-packages:
   - python3-unbound
-  - systemd-oomd-defaults-251.7-611.fc37.noarch
 
 repos:
   - fedora-37

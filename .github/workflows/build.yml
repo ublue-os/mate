@@ -29,4 +29,8 @@ jobs:
         run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
 
       - name: Build OSTree container image and push to registry
-        run: rpm-ostree compose image --initialize --format=registry fedora-mate.yaml ghcr.io/ublue-os/mate:latest
+        uses: Wandalen/wretry.action@master
+        with:
+          command: rpm-ostree compose image --initialize --format=registry fedora-mate.yaml ghcr.io/ublue-os/mate:latest
+          attempt_limit: 3
+          attempt_delay: 2000

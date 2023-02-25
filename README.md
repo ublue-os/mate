@@ -6,7 +6,7 @@ There are currently no installer images, but the MATE variant may be installed f
 
 ## Usage
 
-On Fedora Silverblue or Kinoite, run the following command to rebase to Vauxite:
+On Fedora Silverblue or Kinoite, run the following command to rebase to MATE:
 ```shell
 rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/ublue-os/mate:latest
 ```
